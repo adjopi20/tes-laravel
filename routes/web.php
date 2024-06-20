@@ -20,7 +20,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 });
 
+Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 
 Route::resource('products', ProductController::class);
+
 
 require __DIR__.'/auth.php';

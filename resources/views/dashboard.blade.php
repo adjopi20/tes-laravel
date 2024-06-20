@@ -22,7 +22,22 @@
                         <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Add New Product
                         </a>
+                        <a href="{{ route('products.index') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-4">
+                            View All Products
+                        </a>
                     </div>
+                </div>
+
+                 <!-- Search Product by Name -->
+                 <div class="mt-4">
+                    <form action="{{ route('products.search') }}" method="GET">
+                        <div class="flex items-center">
+                            <input type="text" name="name" placeholder="Search by product name" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:shadow-outline">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-4">
+                                Search
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
             </div>

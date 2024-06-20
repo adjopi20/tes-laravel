@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+
 
 
 class ProductController extends Controller
@@ -18,6 +20,13 @@ class ProductController extends Controller
     {
         $products = Product::all();
         return view('products.index', compact('products'));
+    }
+
+    public function search(Request $request)
+    {
+    $name = $request->input('name');
+    $products = Product::where('name', 'LIKE', '%' . $name . '%')->get();
+    return view('products.index', compact('products'));
     }
 
     public function create(): View
@@ -49,7 +58,7 @@ class ProductController extends Controller
         return view('products.edit', compact('product'));
     }
 
-    public function update(ProductRequest $request, $id): View
+    public function update(ProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
         $validated = $request->validated();
@@ -57,9 +66,9 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
-    public function destroy($id): View
+    public function destroy(Product $product): RedirectResponse
     {
-        $product = Product::findOrFail($id);
+        // $product = Produ ct::findOrFail($id);
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }

@@ -8,40 +8,33 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <form method="POST" action="{{ route('products.update', $product->id) }}">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    <form action="{{ route('products.update', $product->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
-                            <input type="text" name="name" id="name" value="{{ old('name', $product->name) }}" class="mt-1 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-white">
-                            @error('name')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
+                        
+                        <div>
+                            <x-input-label for="name" :value="__('Name')" />
+                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $product->name)" required autofocus autocomplete="name" />
+                            <x-input-error class="mt-2" :messages="$errors->get('name')" />
                         </div>
 
-                        <div class="mb-4">
-                            <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
-                            <textarea name="description" id="description" rows="3" class="mt-1 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-white">{{ old('description', $product->description) }}</textarea>
-                            @error('description')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
+                        <div>
+                            <x-input-label for="description" :value="__('Description')" />
+                            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full" :value="old('description', $product->description)" required autocomplete="description" />
+                            <x-input-error class="mt-2" :messages="$errors->get('description')" />
                         </div>
 
-                        <div class="mb-4">
-                            <label for="price" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Price</label>
-                            <input type="number" name="price" id="price" value="{{ old('price', $product->price) }}" class="mt-1 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-white">
-                            @error('price')
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
+                        <div>
+                            <x-input-label for="price" :value="__('Price')" />
+                            <x-text-input id="price" name="price" type="number" step="0.01" class="mt-1 block w-full" :value="old('price', $product->price)" required autocomplete="price" />
+                            <x-input-error class="mt-2" :messages="$errors->get('price')" />
                         </div>
 
-                        <div class="flex items-center mt-6">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                Update Product
-                            </button>
-                            <a href="{{ route('products.index') }}" class="ml-4 text-gray-500 hover:text-gray-600">Cancel</a>
+                        <div class="flex items-center justify-end mt-4">
+                            <x-primary-button class="ml-4">
+                                {{ __('Update') }}
+                            </x-primary-button>
                         </div>
                     </form>
                 </div>
